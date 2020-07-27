@@ -1,5 +1,13 @@
 from PIL import Image
+import docx
 
+
+def getText(filename):
+    doc = docx.Document(filename)
+    fullText = []
+    for para in doc.paragraphs:
+        fullText.append(para.text)
+    return '\n'.join(fullText)
 
 def str2bin(text):
 	tBin = ""
@@ -137,14 +145,18 @@ def decrypt(image):
 
 img = input("Enter image name: ")
 image = Image.open(img)
-
+'''
+text = getText('book.docx')
+text = text * 3
+encrypt(image, text)
+'''
 n = int(input("(1) for encrypt, (2) for decrypt: "))
 if n == 1:
 	text = input("Enter text: ")
 	encrypt(image, text)
 elif n == 2:
-	text = decrypt(image)
-	print(text)
+	otext = decrypt(image)
+	print(otext)
 
 '''
 data = "hi"
